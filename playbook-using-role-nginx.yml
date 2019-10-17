@@ -1,0 +1,13 @@
+---
+- hosts: linuxmachines
+  become: true
+  tasks:
+  - name: Say Hello! :)
+    debug:
+      msg: "Hello World!!!!!!"
+  - include_role:
+      name: geerlingguy.nginx
+    vars:
+      nginx_vhosts:
+        - listen: "8085 http"
+          server_name: "nginx_example"

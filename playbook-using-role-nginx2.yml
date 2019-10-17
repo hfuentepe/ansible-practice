@@ -1,0 +1,11 @@
+---
+- hosts: linuxmachines
+  become: true
+  tasks:
+  - include_role:
+      name: nginxinc.nginx
+    vars:
+      nginx_http_template:
+        listen:
+          listen_localhost:
+            port: 8081

@@ -1,0 +1,8 @@
+---
+- name: Provision prod
+  hosts: linuxmachines
+  become: true
+  tasks:
+  - include_role:
+      name: docker
+    

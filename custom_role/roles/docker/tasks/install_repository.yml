@@ -1,0 +1,9 @@
+---
+- name: Add docker repo
+  yum_repository:
+      name: docker
+      description: Repository for Docker Community Edition
+      baseurl: 'https://download.docker.com/linux/centos/7/$basearch/stable'
+      gpgcheck: yes
+      gpgkey: https://download.docker.com/linux/centos/gpg
+      enabled: yes
