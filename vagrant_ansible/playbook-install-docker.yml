@@ -1,0 +1,39 @@
+---
+- hosts: linuxmachines
+  become: true
+  tasks:
+    - name: Install device-mapper-persistent-data
+      yum:
+        name: device-mapper-persistent-data
+        state: latest
+    - name: Install yum utils
+      yum:
+        name: yum-utils
+        state: latest
+    - name: Install lvm2
+      yum:
+        name: lvm2
+        state: latest
+    - name: Add docker repo
+      yum_repository:
+        name: docker
+        description: Repository for Docker Community Edition
+        baseurl: 'https://download.docker.com/linux/centos/7/$basearch/stable'
+        gpgcheck: yes
+        gpgkey: https://download.docker.com/linux/centos/gpg
+        enabled: yes
+    - name: Install Docker Engine
+      yum:
+        name: docker-ce
+        state: latest
+    - name: Start and enable Docker
+      service:
+        name: docker
+        state: started
+        enabled: true
+    - name: Add user ansible to docker group
+      user:
+        name: ansible
+        groups: docker
+        append: yes
+      become: yes

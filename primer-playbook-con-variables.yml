@@ -1,0 +1,19 @@
+---
+- hosts: node2
+  become: true
+  vars:
+    package_name: tomcat
+  tasks:
+    - name: Desinstalar apache
+      yum:
+        name: httpd
+        state: absent
+    - name: 'Instalar software {{ package_name }}'
+      yum:
+        name: "{{ package_name }}"
+        state: present
+    - name: Iniciar el software
+      service:
+        name: "{{ package_name }}"
+        state: started
+        enabled: yes
